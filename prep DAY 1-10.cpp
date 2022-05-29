@@ -124,7 +124,7 @@ int findDuplicate(vector<int>& nums) {
             {
                 if(mat[i][j]==0) 
                 {
-                    mat[i][0]=mat[0][i]=0;
+                    mat[i][0]=mat[0][j]=0;
                 }
             }
         }
