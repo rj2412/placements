@@ -165,7 +165,7 @@ void nextpermutation(vector<int>&nums)
     int k,l;
     for(k=n-2;k>=0;k--) 
     {
-        if(nums[k]>nums[k+1]) break;
+        if(nums[k]<nums[k+1]) break;
     }
     if(k<0) reverse(nums.begin(),nums.end())//edge case eg. nums{5,4,3,2,1}
     else {
