@@ -533,6 +533,7 @@ vector<int>twosum(vector<int>&nums,int target)
 } //TC-O(n) SC-O(n)
 
 //2. 4sum leetcode
+  vector<vector<int>>4sum(vector<int>&nums){
     vector<vector<int>>res;
         if(nums.empty()) return res;
         int n=nums.size();
@@ -637,7 +638,7 @@ vector<int>twosum(vector<int>&nums,int target)
         
     } // TC- O(n) sc-O(N)
 
-    //DAY 6
+    //DAY 5
     // LINKED LIST
     //1. reverse link list
      ListNode* reverseList(ListNode* head) {
