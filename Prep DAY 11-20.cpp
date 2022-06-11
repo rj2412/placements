@@ -100,7 +100,7 @@ int findmedian(vector<vector<int>>&mat)
     while(l<=r)
     {
         int cut1=(l+r)/2;
-        int cut2=(n1+n2+1) - cut1;
+        int cut2=(n1+n2+1)/2- cut1;
         int l1=cut1==0 ? INT_MIN : nums1[cut1-1];
         int l2=cut2==0 ? INT_MIN : nums2[cut2-1];
         int r1=cut1==n1 ? INT_MAX : nums1[cut1];
