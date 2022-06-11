@@ -117,29 +117,29 @@ int findmedian(vector<vector<int>>&mat)
  } // tc-O(log(min(n1,n2))) sc-O(1)
 
  // 6. kth element of two sorted arrays
- double findmed(vector<int>nums1,vector<int>nums2) //taking nums1 as smaller array
-
- {
-    int n1=nums1.size();
-    int n2=nums2.size();
-    int l=max(0,k-n2),r=min(k,n1);
-    while(l<=r)
-    {
-        int cut1=(l+r)/2;
-        int cut2=k - cut1;
-        int l1=cut1==0 ? INT_MIN : nums1[cut1-1];
-        int l2=cut2==0 ? INT_MIN : nums2[cut2-1];
-        int r1=cut1==n1 ? INT_MAX : nums1[cut1];
-        int r2=cut2==n2 ? INT_MAX : nums2[cut2];
-        if(l1<=r2 && l2<=r1)
-        {
-             return max(l1,l2);
+int kthelement(int array1[],int array2[],int m,int n,int k) {
+    int p1=0,p2=0,counter=0,answer=0;
+    
+    while(p1<m && p2<n) {
+        if(counter == k) break;
+        else if(array1[p1]<array2[p2]) {
+            answer = array1[p1];
+            ++p1;
         }
-        else if(l1>r2) r=cut1-1;
-        else l=cut1+1;
+        else {
+            answer = array2[p2];
+            ++p2;
+        }
+        ++counter;
     }
-    return l;
- } // tc-O(log(min(n1,n2))) sc-O(1)
+    if(counter != k) {
+        if(p1 != m-1) 
+            answer = array1[k-counter];
+        else 
+            answer = array2[k-counter];
+    }
+    return answer;
+} // tc-O(log(min(n1,n2))) sc-O(1)
 
  //7. allocate min pages
  bool valid(int a[],int n,int m,int barrier)
