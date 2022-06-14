@@ -412,7 +412,7 @@ int kthelement(int array1[],int array2[],int m,int n,int k) {
   }
 } // tc -O(n) sc-O(n)
 
-// DAY 8
+// DAY 14
 // STACKS AND QUEUES
 
  //1. next smaller element
