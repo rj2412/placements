@@ -367,7 +367,7 @@ int kthelement(int array1[],int array2[],int m,int n,int k) {
                 if(st.empty()) return false;
                 char c=st.top();
                 st.pop();
-                if(s[i]=='(' && c==')' || s[i]=='[' && c==']' || s[i]=='{' && c=='}'   ) continue;
+                if(s[i]==')' && c=='(' || s[i]==']' && c=='[' || s[i]=='}' && c=='{'   ) continue;
                 else return false;
             }
         }
