@@ -146,7 +146,7 @@ vector<vector<int>>genPascaltriangle(int nrows) // no of rows as input and we ha
     vector<vector<int>>r(nrows);
     for(int i=0;i<nrows;i++)
     {
-        r.resize(i+1);
+        r[i].resize(i+1);
         r[i][0]=r[i][i]=1;
         for(int j=1;j<i;j++)
         {
