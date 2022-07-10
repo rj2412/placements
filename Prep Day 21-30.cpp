@@ -73,58 +73,28 @@ int findceil(Node* root,int key)
     } //tc-O(n) sc-O(1)
 
     //3. two sum IV (two sum in BST)
-    class BSTIterator {
-    stack<TreeNode *> myStack;
-    bool reverse = true; 
-public:
-    BSTIterator(TreeNode *root, bool isReverse) {
-        reverse = isReverse; 
-        pushAll(root);
+  void solve(TreeNode *root , vector<int>&ans)
+ {
+     if(!root) return;
+     if(root->left) solve(root->left,ans);
+     ans.push_back(root->val);
+     if(root->right) solve(root->right, ans);
+ }
+int t2Sum(TreeNode* root, int sum) {
+    if(!root) return 0;
+    vector<int>in;
+    solve(root,in);
+    int n=in.size();
+    int i=0;
+    int j=n-1;
+    while(i<j)
+    {
+        if(in[i]+in[j]==sum) return 1;
+        if(in[i]+in[j] <sum) i++;
+        else j--;
     }
-
-    /** @return whether we have a next smallest number */
-    bool hasNext() {
-        return !myStack.empty();
-    }
-
-    /** @return the next smallest number */
-    int next() {
-        TreeNode *tmpNode = myStack.top();
-        myStack.pop();
-        if(!reverse) pushAll(tmpNode->right);
-        else pushAll(tmpNode->left);
-        return tmpNode->val;
-    }
-
-private:
-    void pushAll(TreeNode *node) {
-        for(;node != NULL; ) {
-             myStack.push(node);
-             if(reverse == true) {
-                 node = node->right; 
-             } else {
-                 node = node->left; 
-             }
-        }
-    }
-};
-class Solution {
-public:
-    bool findTarget(TreeNode* root, int k) {
-        if(!root) return false; 
-        BSTIterator l(root, false); 
-        BSTIterator r(root, true); 
-        
-        int i = l.next(); 
-        int j = r.next(); 
-        while(i<j) {
-            if(i + j == k) return true; 
-            else if(i + j < k) i = l.next(); 
-            else j = r.next(); 
-        }
-        return false; 
-    }
-}; //tc-O(n) sc-O(h)*2
+    return 0;
+} // tc - O(n) + O(logn) sc-O(n)
 
 //4. BST iterator
  
