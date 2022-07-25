@@ -396,21 +396,29 @@ int kthelement(int array1[],int array2[],int m,int n,int k) {
     } // tc-O(2n) sc-O(n) 
 
     // 7. sort a stack
- void SortedStack :: sort()
+void sortsack(stack<int>&st)
 {
-  
-   int n=s.size();
-  multiset<int>a;
-  while(n--)
-  {
-      a.insert(s.top());
-      s.pop();
-  }
-  for(auto i : a)
-  {
-      s.push(i);
-  }
-} // tc -O(n) sc-O(n)
+    if(st.size()==1) return;
+    int temp=st.top();
+    st.pop();
+    sortstack(st);
+    insert(st,temp);
+    return;
+}
+void insert(stack<int>&st, int temp)
+{
+    if(st.size==0 || st.top()<=temp)
+    {
+        st.push(temp);
+        return;
+    }
+    int val=st.top();
+    st.pop();
+    insert(st,temp);
+    st.push(val);
+    return;
+}
+  // tc -O(n) sc-O(n)
 
 // DAY 14
 // STACKS AND QUEUES
