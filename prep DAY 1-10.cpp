@@ -969,7 +969,7 @@ ListNode* rotateRight(ListNode* head, int k) {
         int lmax=0,rmax=0;
         while(l<r)
         {
-            if(ht[l]>=hr[r]) // checking for ht[l]
+            if(ht[l]<=hr[r]) // checking for ht[l]
             {
               if(ht[l]>=lmax) lmax=ht[l]; // cant store water in this case so updating lmax to ht [l]
               else water+=lmax-ht[l]; // storing water
