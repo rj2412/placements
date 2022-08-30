@@ -22,7 +22,7 @@ int floorBST(Node* root, int key)
             floor=root->val;
             root=root->right;
         }
-        else root=root->right;
+        else root=root->left;
     }
     return floor;
     
