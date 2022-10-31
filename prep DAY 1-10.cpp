@@ -862,8 +862,8 @@ bool iscycle(ListNode* head)
     //6.flatten the linked list
       Node* merge(Node *a,Node *b)
     {
-        Node * temp=new Node(0);
-        Node *res=temp;
+        Node * res=new Node(0);
+        Node *temp=res;
         while(a!=NULL && b!=NULL)
         {
             if(a->data < b->data){
