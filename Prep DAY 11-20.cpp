@@ -575,19 +575,21 @@ class LRUCache{
     //5. sliding window maximum
     vector<int> maxSlidingWindow(vector<int>& nums, int k)
     {
-        vector<int>ans;
-        int n=nums.size();
-        deque<int>dq;
-        for(int i=0;i<n;i++)
-        {
-            if(!dq.empty() && dq.front()==i-k) dq.pop_front(); // removing all index which is out of bound
-            while(nums[i]>nums[dq.back()] && !dq.empty()) dq.pop_back(); // maintaining decreasing order .. index having maxm value at front and minimum at back
-            dq.push_back(i);
-            if(i>=k-1) ans.push_back(nums[i]); 
+     vector<int> ans;
+     deque<int> q; // max queue
 
+      for (int i = 0; i < nums.size(); ++i)
+       {
+         while (!q.empty() && q.back() < nums[i])
+          {
+              q.pop_back();
+          }
+      q.push_back(nums[i]);
+      if (i >= k && nums[i - k] == q.front())  q.pop_front(); // out of bound
+      if (i >= k - 1)  ans.push_back(q.front()); // storing one of ans
+  }
 
-        }
-        return ans;
+  return ans;
     } // tc-O(n) + O(n) sc-O(n)
 
     // 6. implementing minm stack
