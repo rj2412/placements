@@ -681,35 +681,32 @@ int main() {
 } // tc-2*O(n+e)+O(n) sc-O(n+e)+O(n)
 
 //2. Djikstra's algo for shortest distance bw source and nodes
-vector<int>Djikstra(vector<pair<int,int>>g[n+1],int source){
-	
-	
-	
-	//dijdktra algo begin here
-	priority_queue<pair<int,int>,vector<pair<int,int>>, graeter<pair<int,int>>>pq;// min heap in pair(dist,node)
-	vector<int>dist(n=1,INT_MAX);// array to store distance
-	dist[source]=0;
-	pq.push(make_pair(0,source));
-	
-	while(!pq.empty()){
-	    int dis = pq.top().first;
-	    int prev= pq.top().second;
-	    pq.pop();
-	    
-	    vector<pair<int,int>> :: iterator it;
-	    for(it=g[prev].begin();it!=g[prev].end();it++){
-	        int next= it->first;
-	        int nextDist=it->second;
-	        if(dist[next]>dist[prev]+nextDist){
-	            dist[next]= dist[prev]+ nextDist;
-	            pq.push(make_pair(dist[next],next));
-	        }
-	    }
-	    
-	}
-	return dist;	
-	
-} //tc-O((n+e)logn) sc-O(n)+o(n)
+ vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
+    {
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>>pq; // dist , node
+        vector<int>dist(V,1e9);
+        dist[S]=0;
+        pq.push({0,S});
+        while(!pq.empty())
+        {
+            int dis=pq.top().first;
+            int node=pq.top().second;
+            pq.pop();
+            for(auto it: adj[node])
+            {
+                int adjnode=it[0];
+                int edgewt=it[1];
+                if(dis + edgewt < dist[adjnode])
+                {
+                    dist[adjnode]=dis+edgewt;
+                    pq.push({dist[adjnode],adjnode});
+                }
+            }
+        }
+        return dist;
+       
+    }
+//tc-O((n+e)logn) sc-O(n)+o(n)
 
 //3. Bellman ford algo for detection of negative cycles
 	int isNegativeWeightCycle(int n, vector<vector<int>>adj){
