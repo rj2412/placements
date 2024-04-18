@@ -359,19 +359,19 @@ private:
     } // tc-O(E*N) sc-O(N) n- vertices e- edges
 
     //2. DFS
-    void dfsrec(vector<int>adj[],bitset<n>&vis,int u)
+    void dfsrec(vector<int>adj[],vector<bool>&vis,int i)
     {
         vis[i]=1;
-        cout<<u<<" ";
-        for(int i=0;i<adj[u].size();i++)
+        cout<<i<<" ";
+        for(auto it : adj[i)
         {
-            if(vis(adj[u][i]==0)) dfsrec(adj,vis,adj[u][i]);
+            if(!vis[it)) dfsrec(adj,vis,it);
         }
     }
      
-    void dfs(vector<int>adj[],int n)
+    void dfs(vector<int>adj[],int n,int V)
     {
-        bitset<n> vis; // vis array with all 0 intitially
+        vector<bool> vis(V,false); // vis array with all 0 intitially
         for(int i=0;i<n;i++)
         {
             if(vis[i]!=1)
