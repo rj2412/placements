@@ -573,6 +573,30 @@ class LRUCache{
     //4,lfu cache ..ignored
 
     //5. sliding window maximum
+
+   //m-1 - using priority_queue
+vector<int> maxSlidingWindow(vector<int> &nums, int k)
+{
+  priority_queue<pair<int,int>>pq; // num->indx
+  vector<int>ans;
+  for(int i=0;i<k;i++)
+  {
+    pq.push({nums[i],i});
+  }
+  ans.push_back(pq.top().first);
+
+  for(int i=k;i<nums.size();i++)
+  {
+    pq.push({nums[i], i});
+    while(!pq.empty() && pq.top().second<=i-k) pq.pop();
+    
+    ans.push_back(pq.top().first);
+  }
+  return ans;
+} // tc- O(n logn) sc- O(k)
+
+
+    // m2 - using deque
     vector<int> maxSlidingWindow(vector<int>& nums, int k)
     {
      vector<int> ans;
@@ -590,7 +614,7 @@ class LRUCache{
   }
 
   return ans;
-    } // tc-O(n) + O(n) sc-O(n)
+    } // tc-O(n)   sc-O(k)
 
     // 6. implementing minm stack
     #define ll long long
