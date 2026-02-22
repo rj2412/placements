@@ -84,7 +84,7 @@ vector<vector<int>>merge(vector<vector<int>>nums)
     ans.push_back(nums[0]);
     for(auto it : nums)
     {
-      if(ans.back()[1]>=it[1]) ans.back()[1]=max(ans.back()[1],it[1]);
+      if(ans.back()[1]>=it[0]) ans.back()[1]=max(ans.back()[1],it[1]);
       else ans.push_back(it);
     }
     return ans;
