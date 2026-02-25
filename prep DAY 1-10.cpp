@@ -1154,26 +1154,22 @@ static bool comp(Item a, Iteam b)
 //DAY9
 // RECCURSION
  //1. print subset sum in increasing order
- vector<int>ans;
-
- void solve(vector<int>arr,int n,int indx,int sum)
- {
-     if(indx==n) return;
-     for(int i=indx;i<n;i++)
-     { 
-         ans.push_back(sum+arr[i]);
-         solve(arr,n,i+1,sum+arr[i]);
-         
-     }
- }
-    vector<int> subsetSums(vector<int> arr, int N)
-    {
-      
-        
-        ans.push_back(0);
-        solve(arr,N,0,0);
-        return ans;
-    } // tc-O(2^N) SC-O(2^N) 
+ void findSums(vector<int>nums,int n,int indx, int currSum, vector<int>&sums){
+      if(indx==n){
+        sums.push_back(currSum);
+        return;
+      }
+      findSums(nums,n,indx+1,currSum+nums[indx],sums); // including curr indx value
+      findSums(nums,n,indx+1,currSum,sums); //excluding curr indx
+    }
+    vector<int>subsetSums(vector<int>&nums){
+      int n=nums.size();
+      vector<int>sums;
+      findSums(nums,n,0,0,sums);
+      sort(sums.begin(),sums.end());
+      return sums;
+    }
+  // tc-O(N*2^N) SC-O(2^N) 
 
     //2.subset  II print subsets (result must not contains duplicate subsets )
     vector<vector<int>>ans;
