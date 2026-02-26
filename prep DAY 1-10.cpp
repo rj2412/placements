@@ -1196,33 +1196,31 @@ static bool comp(Item a, Iteam b)
     } // TC-O(nlogn * 2^n) sc-O(n)
 
     //3. combination sum
-    vector<vector<int>>ans;
-    void solve(vector<int>&arr,vector<int>&temp,int &target,int indx)
-    {
-        if(indx==arr.size())
+    void getCombSum(vector<int>nums,vector<vector<int>>&ans, vector<int>&ds,int indx,int target){
+      if (indx == nums.size())
+      {
+        if (target == 0)
         {
-            if(target==0)
-            {
-            ans.push_back(temp);
-            }
-            return;
+          ans.push_back(ds);
         }
-        if(arr[indx]<=target) // staying at same index and checking for valid set
-        {
-            temp.push_back(arr[indx]);
-            solve(arr,temp,target-arr[indx],indx);
-        }
-        solve(arr,temp,target,indx+1); // after staying part is done we are moving to next of index and checking
+        return;
+      }
+     if(nums[indx]<=target){
+      ds.push_back(nums[indx]);
+      getCombSum(nums,ans,ds,indx,target-nums[indx] );// stay on current indx to allow repeated elements
+      ds.pop_back(); // pop to backtrack
+     }
+     getCombSum(nums,ans,ds,indx+1,target);// skip the current ele and move to next indx
 
     }
 
-
-    vector<vector<int>>combsum(vector<int>&arr,int target)
-    {
-        vector<int>temp;
-        solve(arr,temp,target,0);
-        return ans;
-    } // tc-O(k* 2^k) sc-O(k*x) k is avg length of combinations , x = assumed no of combinations
+    vector<vector<int>>combSums(vector<int>nums, int target){
+      vector<vector<int>>ans;
+      vector<int>ds ;
+      getCombSum(nums,ans,ds,0,target);
+      return ans;
+    }
+   // tc-O(k* 2^k) sc-O(k*x) k is avg length of combinations , x = assumed no of combinations
 
     //4. combination sum II
      vector<vector<int>>ans;
