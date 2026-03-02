@@ -117,29 +117,46 @@ int findmedian(vector<vector<int>>&mat)
  } // tc-O(log(min(n1,n2))) sc-O(1)
 
  // 6. kth element of two sorted arrays
-int kthelement(int array1[],int array2[],int m,int n,int k) {
-    int p1=0,p2=0,counter=0,answer=0;
-    
-    while(p1<m && p2<n) {
-        if(counter == k) break;
-        else if(array1[p1]<array2[p2]) {
-            answer = array1[p1];
-            ++p1;
+int kthElement(vector<int>& a, vector<int>& b, int k) {
+        int m = a.size();
+        int n = b.size();
+        // Ensure a is smaller array for optimization
+        if (m > n) {
+            // Swap a and b
+            return kthElement(b, a, k); 
+        } 
+        // Length of the left half
+        int left = k; 
+        // Apply binary search
+        int low = max(0, k - n), high = min(k, m);
+        while (low <= high) {
+            int mid1 = (low + high) >> 1;
+            int mid2 = left - mid1;
+
+            // Initialize l1, l2, r1, r2
+            int l1 = (mid1 > 0) ? a[mid1 - 1] : INT_MIN;
+            int l2 = (mid2 > 0) ? b[mid2 - 1] : INT_MIN;
+            int r1 = (mid1 < m) ? a[mid1] : INT_MAX;
+            int r2 = (mid2 < n) ? b[mid2] : INT_MAX;
+
+            // Check if we have found the answer
+            if (l1 <= r2 && l2 <= r1) {
+                return max(l1, l2);
+            } 
+            else if (l1 > r2) {
+                // Eliminate the right half
+                high = mid1 - 1;
+            } 
+            else {
+                // Eliminate the left half
+                low = mid1 + 1;
+            }
         }
-        else {
-            answer = array2[p2];
-            ++p2;
-        }
-        ++counter;
+        
+         // Dummy return statement 
+        return -1;
     }
-    if(counter != k) {
-        if(p1 != m-1) 
-            answer = array1[k-counter];
-        else 
-            answer = array2[k-counter];
-    }
-    return answer;
-} // tc-O(log(min(n1,n2))) sc-O(1)
+// tc-O(log(min(n1,n2))) sc-O(1)
 
  //7. allocate min pages
  bool valid(int a[],int n,int m,int barrier)
