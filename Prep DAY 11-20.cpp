@@ -1267,6 +1267,25 @@ int getMinCharToAddedToMakeStringPalin(string str)
       return post;
   } // O(2n) sc-O(n)
 
+  // one more post traversal - simpler one
+  vector<int> postorderTraversal(TreeNode* root) { 
+        if(root==nullptr) return {};
+        stack<TreeNode*>st;
+        st.push(root);
+        vector<int>post;
+        while(!st.empty()){
+            TreeNode* node = st.top();
+            st.pop();
+            post.push_back(node->val);
+            if(node->left) st.push(node->left);
+            if(node->right) st.push(node->right);
+        }
+        reverse(post.begin(),post.end());
+        return post;
+        
+    } // tc - O(n) SC - O(n)
+ 
+
   //4. right /left view of binary tree - here we doin right view
   vector<int>rightview(Node* root)
   {
